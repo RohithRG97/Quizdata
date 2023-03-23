@@ -3,6 +3,7 @@ import random
 from flask import Flask, render_template, request, url_for, jsonify
 import pypyodbc as odbc
 import plotly.graph_objs as go
+import pandas as pd
 
 app = Flask(__name__)
 
@@ -89,6 +90,68 @@ def barchart1():
     #return jsonify(data)
     return render_template('barchart1.html', chart=chart)
 
+@app.route('/question10.html', methods =["GET", "POST"])
+def question10():
+    nval = request.form.get("n")
+    range1 = request.form.get("r1")
+    range2 = request.form.get("r2")
+    sql_stmt1 = "SELECT S FROM dbo.datas WHERE r = ?"
+    value1 = [range1]
+    sql_stmt2 = "SELECT S FROM dbo.datas WHERE r = ?"
+    value2 = [range2]
+
+    cursor = conn.cursor()
+    cursor.execute(sql_stmt1, value1)
+    s1 = cursor.fetchone()[0]
+
+    cursor.execute(sql_stmt2, value2)
+    s2 = cursor.fetchone()[0]
+
+    svalrange = s2 - s1
+
+    barvalrange1 = int(svalrange)/int(nval)
+
+    count_r = []
+    count_s = []
+    sql_stmt3 = "SELECT COUNT(R) FROM dbo.datas WHERE S>= ? AND S <= ? AND R <= ?"
+    value3 = [0, barvalrange1, range2]
+    count_s.append(barvalrange1)
+    
+    while(True):    
+        cursor.execute(sql_stmt3, value3)
+        s3 = cursor.fetchone()[0]
+
+        count_r.append(s3)
+        value3[0] = value3[0] + barvalrange1
+        value3[1] = value3[1] + barvalrange1
+
+        if(value3[1] > svalrange):
+            break
+        else:
+            count_s.append(value3[1])
+    
+    data = [
+        go.Bar(
+            x= count_r,
+            y= count_s,
+            orientation='h'
+        )
+    ]
+
+    layout = go.Layout(
+        title='Quiz 4',
+        xaxis=dict(title='R Count'),
+        yaxis=dict(title='S Count')
+    )
+
+    fig = go.Figure(data=data, layout=layout)
+    chart = fig.to_html(full_html=False)
+    
+    print(count_r)
+    print(count_s)
+    return render_template('question10.html', chart=chart)
+
+    
 if __name__ == "__main__":
     app.run(debug=True)
     
