@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Quiz 4</title>
+
+    <body>
+        <h1>Rohith Reddy Gurram</h1>
+        <h2>ID: 1001959477</h2>
+        <h2>Quiz 4</h2>
+        
+        <h3>Magnitude Graph</h3>
+        <form action="{{ url_for("scatterpage")}}" method="post">
+            <input type="submit" name="action"></button>
+        </form>
+
+        <h3>Pie Chart of Magnitudes</h3>
+        <form action="{{ url_for("piechart1")}}" method="post">
+            <input type="submit" name="action"></button>
+        </form>
+
+        <h3>Bar Chart of Magnitudes</h3>
+        <form action="{{ url_for("barchart1")}}" method="post">
+            <input type="submit" name="action"></button>
+        </form>
+    </body>
+</html>
