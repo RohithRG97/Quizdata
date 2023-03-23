@@ -30,8 +30,6 @@ def scatterpage():
         data['x'].append(row[0])
         data['y'].append(row[1])
     json_data = json.dumps(data)
-
-    conn.close()
     
     return render_template('scatterpage.html', data=json_data)
 
@@ -90,4 +88,7 @@ def barchart1():
 
     #return jsonify(data)
     return render_template('barchart1.html', chart=chart)
+
+if __name__ == "__main__":
+    app.run(debug=True)
     
