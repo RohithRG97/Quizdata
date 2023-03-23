@@ -19,6 +19,17 @@
             <input type="submit" name="action"></button>
         </form>
 
+        <h3> Question 11: </h3>
+        <form action="{{ url_for("question11")}}" method="post">
+            <label for="range1">Enter the first 'R' value:</label>
+            <input type="number" id="range1" name="r1">
+            <label for="range2">Enter the second 'R' value:</label>
+            <input type="number" id="range2" name="r2">
+            <label for="nval">Enter the 'N' value:</label>
+            <input type="number" id="nval" name="n">
+            <input type="submit" name="action"></button>
+        </form>
+
         <h3>Magnitude Graph</h3>
         <form action="{{ url_for("scatterpage")}}" method="post">
             <input type="submit" name="action"></button>
