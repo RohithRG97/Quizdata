@@ -3,7 +3,7 @@ import random
 from flask import Flask, render_template, request, url_for, jsonify
 import pypyodbc as odbc
 import plotly.graph_objs as go
-import pandas as pd
+
 
 app = Flask(__name__)
 
@@ -214,6 +214,24 @@ def question11():
     print(count_r)
     print(count_s)
     return render_template('question11.html', chart=chart)
+
+
+@app.route('/question12.html', methods =["GET", "POST"])
+def question12():
+    range1 = request.form.get("r1")
+    range2 = request.form.get("r2")
+    sql_stmt1 = "SELECT S, T FROM dbo.datas WHERE r >= ? AND r <= ?"
+    value1 = [range1, range2]
+    
+
+    cursor = conn.cursor()
+    cursor.execute(sql_stmt1, value1)
+    s1 = cursor.fetchall()
+
+    x = [row[0] for row in s1]
+    y = [row[1] for row in s1]
+
+    return render_template('question12.html', x=x, y=y)
 
     
 if __name__ == "__main__":
