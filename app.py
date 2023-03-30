@@ -14,6 +14,24 @@ conn = odbc.connect(connection_string)
 def home():
     if request.method == "GET":
         return render_template("home.html")
+    
+@app.route('/bonusquiz.html', methods =["GET", "POST"])
+def texteval():
+    if request.method == "POST":
+        entered_text = request.form.get("entertext")
+
+        textlength = len(entered_text)
+
+        space_count = entered_text.count(' ')
+        spch1_count = entered_text.count('+')
+        spch2_count = entered_text.count('-')
+        spch3_count = entered_text.count('$')
+        spch4_count = entered_text.count('*')
+
+        spch_count = spch1_count + spch2_count + spch3_count + spch4_count
+
+        return render_template("bonus_quiz.html", textlength=textlength, space_count=space_count, spch_count=spch_count)
+
 
 @app.route('/scatterpage.html', methods =["GET", "POST"])
 def scatterpage():
