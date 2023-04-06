@@ -9,9 +9,13 @@
     <h3>1001959477</h3>
 
     <h2>Quiz 5</h2>
-    <form action="{{ url_for("texteval")}}" method="post">
-        <p><label for="entertext">Box T:</label></p>
-        <textarea id="entertext" name="entertext" rows="4" cols="50" maxlength="1500"></textarea>
+    
+
+    <form action="{{ url_for("texteval2")}}" method="post">
+        <p><label for="words">Enter Words:</label></p>
+        <textarea id="words" name="words" rows="2" cols="50" maxlength="1500"></textarea>
+        <p><label for="entertext2">Enter the Text:</label></p>
+        <textarea id="entertext2" name="entertext2" rows="4" cols="50" maxlength="1500"></textarea>
         <input type="submit" value="Submit">
     </form>
 </body>

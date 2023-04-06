@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<body>
+    <h2>Quiz 5</h2>
+    <h3>Rohith Reddy Gurram</h3>
+    <h3>1001959477</h3>
+
+    <!DOCTYPE html>
+<html>
+<head>
+	<title>Word Count Results</title>
+</head>
+<body>
+	<h1>Word Count Results</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>Word</th>
+				<th>Count</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for word, count in counts %}
+			<tr>
+				<td>{{ word }}</td>
+				<td>{{ count }}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</body>
+</html>
