@@ -1,0 +1,18 @@
+<!-- upload.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Text Evaluation</title>
+</head>
+<body>
+    <h3>Rohith Reddy Gurram</h3>
+    <h3>1001959477</h3>
+
+    <h2>Quiz 5</h2>
+    <form action="{{ url_for("texteval")}}" method="post">
+        <p><label for="entertext">Box T:</label></p>
+        <textarea id="entertext" name="entertext" rows="4" cols="50" maxlength="1500"></textarea>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

@@ -1,66 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Quiz 4</title>
-        <h2>Rohith Reddy Gurram</h2>
-        <h2>1001959477</h2>
-    <body>
-        <h3> Question 10: </h3>
-        <form action="{{ url_for("question10")}}" method="post">
-            <label for="range1">Enter the first 'R' value:</label>
-            <input type="number" id="range1" name="r1">
-            <label for="range2">Enter the second 'R' value:</label>
-            <input type="number" id="range2" name="r2">
-            <label for="nval">Enter the 'N' value:</label>
-            <input type="number" id="nval" name="n">
-            <input type="submit" name="action"></button>
-        </form>
-
-        <h3> Question 11: </h3>
-        <form action="{{ url_for("question11")}}" method="post">
-            <label for="range1">Enter the first 'R' value:</label>
-            <input type="number" id="range1" name="r1">
-            <label for="range2">Enter the second 'R' value:</label>
-            <input type="number" id="range2" name="r2">
-            <label for="nval">Enter the 'N' value:</label>
-            <input type="number" id="nval" name="n">
-            <input type="submit" name="action"></button>
-        </form>
-
-        <h3> Question 12: </h3>
-        <form action="{{ url_for("question11")}}" method="post">
-            <label for="range1">Enter the first 'R' value:</label>
-            <input type="number" id="range1" name="r1">
-            <label for="range2">Enter the second 'R' value:</label>
-            <input type="number" id="range2" name="r2">
-            <input type="submit" name="action"></button>
-        </form>
-
-        <h3>Magnitude Graph</h3>
-        <form action="{{ url_for("scatterpage")}}" method="post">
-            <input type="submit" name="action"></button>
-        </form>
-
-        <h3>Pie Chart of Magnitudes</h3>
-        <form action="{{ url_for("piechart1")}}" method="post">
-            <input type="submit" name="action"></button>
-        </form>
-
-        <h3>Bar Chart of Magnitudes</h3>
-        <form action="{{ url_for("barchart1")}}" method="post">
-            <input type="submit" name="action"></button>
-        </form>
-
-        <h1>The textarea element</h1>
-
-        <form action="{{ url_for("texteval")}}" method="post">
-        <p><label for="entertext">Enter Text Here:</label></p>
-        <textarea id="entertext" name="entertext" rows="4" cols="50" maxlength="1500"></textarea>
-        <input type="submit" value="Submit">
-        </form>
-
-    </body>
+<html>
+  <head>
+    <title>File Upload</title>
+  </head>
+  <body>
+    <h1>Upload a Text File</h1>
+    <form method="POST" enctype="multipart/form-data">
+      <input type="file" name="file">
+      <input type="text" name="ngram" placeholder="Enter number of n-grams">
+      <button type="submit">Upload and Search</button>
+    </form>
+  </body>
 </html>
