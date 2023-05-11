@@ -5,6 +5,9 @@ import os
 
 app = Flask(__name__)
 
+#connection_string = 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:freecloudsqlserver001.database.windows.net,1433;Database=DemoSQLServerDB;Uid=RohithGurram;Pwd={freecloudsqlserver@123};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
+#cnxn = odbc.connect(connection_string)
+
 
 @app.route('/', methods =["GET", "POST"])
 def home():
