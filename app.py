@@ -11,7 +11,7 @@ connection_string = 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:freecloud
 cnxn = odbc.connect(connection_string)
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/abc', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         lon_min = request.form['lon_min']
