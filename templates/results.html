@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Results</title>
+  </head>
+  <body>
+    <h1>Results</h1>
+    <p>Namburi Pranathi</p>
+    <p>1001967776</p>
+    <table>
+      <thead>
+        <tr>
+          <th>STRCITY</th>
+          <th>STRSTATE</th>
+          <th>ZIPCODE</th>
+          <th>LAT</th>
+          <th>LON</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in results %}
+        <tr>
+          <td>{{ row.STRCITY }}</td>
+          <td>{{ row.STRSTATE }}</td>
+          <td>{{ row.ZIPCODE }}</td>
+          <td>{{ row.LAT }}</td>
+          <td>{{ row.LON }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <h2>Counts by STRSTATE</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>STRSTATE</th>
+          <th>COUNT</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in counts %}
+        <tr>
+          <td>{{ row.STRSTATE }}</td>
+          <td>{{ row[1] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table

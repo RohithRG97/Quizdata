@@ -2,51 +2,35 @@ from flask import Flask, request, render_template
 import string
 import re
 import os
+import pypyodbc as odbc
+
 
 app = Flask(__name__)
 
-#connection_string = 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:freecloudsqlserver001.database.windows.net,1433;Database=DemoSQLServerDB;Uid=RohithGurram;Pwd={freecloudsqlserver@123};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
-#cnxn = odbc.connect(connection_string)
+connection_string = 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:freecloudsqlserver001.database.windows.net,1433;Database=DemoSQLServerDB;Uid=RohithGurram;Pwd={freecloudsqlserver@123};Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
+cnxn = odbc.connect(connection_string)
 
 
-@app.route('/', methods =["GET", "POST"])
-def home():
-    if request.method == "GET":
-        return render_template("upload.html")
-    
-@app.route('/upload', methods=['GET', 'POST'])
-def texteval():
+@app.route('/', methods=['GET', 'POST'])
+def index():
     if request.method == 'POST':
-        entered_text = request.form.get("entertext")
+        lon_min = request.form['lon_min']
+        lon_max = request.form['lon_max']
+        year_min = request.form['year_min']
+        year_max = request.form['year_max']
 
-        textlength = len(entered_text)
+        # Query the database
+        cursor = cnxn.cursor()
+        cursor.execute("SELECT STRCITY, STRSTATE, ZIPCODE, LAT, LON FROM walmartns WHERE LON BETWEEN ? AND ? AND YEAR BETWEEN ? AND ?", (lon_min, lon_max, year_min, year_max))
+        results = cursor.fetchall()
 
-        upper_count = 0
-        digit_count = 0
-        for char in entered_text:
-            if char.isupper():
-                upper_count = upper_count + 1
-            if char.isdigit():
-                digit_count = digit_count + 1
-        
-        space_count = entered_text.count(' ')
-        spch1_count = entered_text.count('.')
-        spch2_count = entered_text.count(',')
-        spch3_count = entered_text.count(':')
-        spch4_count = entered_text.count('?')
-        spch5_count = entered_text.count('$')
-        spch6_count = entered_text.count('(')
-        spch7_count = entered_text.count(')')
-        spch8_count = entered_text.count('-')
-        spch9_count = entered_text.count('&')
+        # Count the number of STRCITY for each STRSTATE
+        cursor.execute("SELECT STRSTATE, COUNT(DISTINCT STRCITY) FROM walmartns WHERE LON BETWEEN ? AND ? AND YEAR BETWEEN ? AND ? GROUP BY STRSTATE", (lon_min, lon_max, year_min, year_max))
+        counts = cursor.fetchall()
 
-        spch_count = spch1_count + spch2_count + spch3_count + spch4_count + spch5_count + spch6_count + spch7_count + spch8_count + spch9_count
+        return render_template('results.html', results=results, counts=counts)
+    else:
+        return render_template('form.html')
 
-        translator = str.maketrans('', '', string.punctuation + string.digits)
-        converted_text = entered_text.translate(translator)
-
-        upper_converted_text = converted_text.upper()
-        textlength2 = len(upper_converted_text)
-
-        return render_template("display.html", textlength=textlength, space_count=space_count, spch_count=spch_count, upper_count = upper_count, digit_count=digit_count, upper_converted_text=upper_converted_text, textlength2=textlength2)    
-    
+if __name__ == '__main__':
+    app.run(debug=True)
